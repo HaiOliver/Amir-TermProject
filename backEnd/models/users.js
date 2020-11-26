@@ -1,21 +1,24 @@
 const sql = require("../db.js");
-var crypto = require('crypto');
+const createAPIKey = require('./APIKey');
 // constructor
 const User = function(user) {
   this.email = user.email;
-  this.token = user.token;
-  this.request = user.request;
+  // create API Token
+  this.api_key = createAPIKey(user.email);
+  this.number_of_requests = 1;
   this.promo = user.promo
 };
 
+/**
+ *
+ * id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email varchar(251) NOT NULL,
+    api_key varchar(251) NOT NULL,
+    number_of_requests int NOT NULL,
+    promo varchar(251) NOT NULL
+ */
 
-// create hashby email -> API key: ======================================
-const createAPIKey = (email) =>{
-  var mykey = crypto.createCipher('aes-128-cbc', email);
-  var mystr = mykey.update('abc', 'utf8', 'hex')
-  return mystr += mykey.final('hex');
 
-}
 
 
 User.create = (newUser, result) => {
@@ -26,7 +29,7 @@ User.create = (newUser, result) => {
       return;
     }
 
-    console.log("created User: ", { id: res.insertId, ...newUser });
+    console.log("Line 18, user.js, created user in Db: ", { id: res.insertId, ...newUser });
     result(null, { id: res.insertId, ...newUser });
   });
 };
