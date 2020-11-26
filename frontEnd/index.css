@@ -4,4 +4,9 @@ background-size: cover;
 font-size: 35px;
 font-weight: 500;
 color: #f72585;
+background-repeat: no-repeat;
+}
+
+#emailHelp{
+      color: #fefae0;
 }

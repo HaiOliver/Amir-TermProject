@@ -1,5 +1,5 @@
 const sql = require("../db.js");
-
+var crypto = require('crypto');
 // constructor
 const User = function(user) {
   this.email = user.email;
@@ -7,6 +7,16 @@ const User = function(user) {
   this.request = user.request;
   this.promo = user.promo
 };
+
+
+// create hashby email -> API key: ======================================
+const createAPIKey = (email) =>{
+  var mykey = crypto.createCipher('aes-128-cbc', email);
+  var mystr = mykey.update('abc', 'utf8', 'hex')
+  return mystr += mykey.final('hex');
+
+}
+
 
 User.create = (newUser, result) => {
   sql.query("INSERT INTO Users SET ?", newUser, (err, res) => {
