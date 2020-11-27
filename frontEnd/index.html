@@ -27,8 +27,13 @@
                           <input name="promo" type="text" class="form-control" id="promo" placeholder="Promo" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary ">Submit</button>
                       </form>
+                    <!-- Alert API Key -->
+                      <div class="alert alert-info" role="alert">
+                            <h2 class="text-success text-center">API Key will display below after fill in registration:</h2>
+                            <h3 id="APIKey" class="text-danger text-center"></h3>
+                      </div>
             </div>
 
 <script>
@@ -36,7 +41,7 @@
             form.addEventListener('submit', event => {
               // submit event detected
                     event.preventDefault()
-                    alert("connecting ..........Let see")
+
                     let email = document.getElementById("email").value
                     let promo = document.getElementById("promo").value
 
@@ -51,7 +56,8 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                      console.log('Success:', data);
+                      console.log('Success, data return from server:', data);
+                        document.getElementById("APIKey").innerHTML = data.api_key
                     })
                     .catch((error) => {
                       console.error('Error:', error);

@@ -1,27 +1,19 @@
 const sql = require("../db.js");
-const createAPIKey = require('./APIKey');
+
 // constructor
 const User = function(user) {
   this.email = user.email;
   // create API Token
-  this.api_key = createAPIKey(user.email);
-  this.number_of_requests = 1;
+
+  this.api_key = user.api_key;
+  this.number_of_requests = 0;
   this.promo = user.promo
 };
 
-/**
- *
- * id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email varchar(251) NOT NULL,
-    api_key varchar(251) NOT NULL,
-    number_of_requests int NOT NULL,
-    promo varchar(251) NOT NULL
- */
 
-
-
-
+// create new user
 User.create = (newUser, result) => {
+  console.log("user need to insert is ========================:", newUser)
   sql.query("INSERT INTO Users SET ?", newUser, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -34,6 +26,7 @@ User.create = (newUser, result) => {
   });
 };
 
+// find one user
 User.findById = (UserId, result) => {
   sql.query(`SELECT * FROM Users WHERE id = ${UserId}`, (err, res) => {
     if (err) {
@@ -53,6 +46,7 @@ User.findById = (UserId, result) => {
   });
 };
 
+// get all users
 User.getAll = result => {
   sql.query("SELECT * FROM Users", (err, res) => {
     if (err) {
@@ -66,6 +60,8 @@ User.getAll = result => {
   });
 };
 
+
+// update user by ID
 User.updateById = (id, User, result) => {
   sql.query(
     "UPDATE Users SET email = ?, name = ?, active = ? WHERE id = ?",
@@ -89,6 +85,7 @@ User.updateById = (id, User, result) => {
   );
 };
 
+// delete user
 User.remove = (id, result) => {
   sql.query("DELETE FROM Users WHERE id = ?", id, (err, res) => {
     if (err) {
@@ -108,6 +105,7 @@ User.remove = (id, result) => {
   });
 };
 
+//remove all users
 User.removeAll = result => {
   sql.query("DELETE FROM Users", (err, res) => {
     if (err) {

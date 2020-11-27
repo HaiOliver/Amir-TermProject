@@ -30,13 +30,16 @@ app.post("/user", (req,res)=>{
    console.log("====================== body post from user request: ", req.body)
    // create API Key:
     let APIKey = createAPIKey(req.body.email)
+    console.log("API key: ", APIKey)
+
      // Create a Customer
      const user = new User({
-       name: req.body.email,
-       score: req.body.promo
+       email: req.body.email,
+       promo: req.body.promo,
+       api_key: APIKey
      });
 
-     // Save Customer in the database
+     // Save Customer in the database -> call User.create() in user.js
      User.create(user, (err, data) => {
        if (err)
          res.status(500).send({
