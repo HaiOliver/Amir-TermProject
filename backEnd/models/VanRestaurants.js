@@ -2,12 +2,11 @@ const sql = require("../db.js");
 
 // constructor
 const VancouverRestaurant = function(vancouverRestaurant) {
-  this.email = vancouverRestaurant.email;
-  // create API Token
-
-  this.api_key = vancouverRestaurant.api_key;
-  this.number_of_requests = 0;
-  this.promo = VancouverRestaurant.promo
+  this.name = vancouverRestaurant.name;
+  this.address = vancouverRestaurant.address;
+  this.postal_code = vancouverRestaurant.postal_code;
+  this.status = vancouverRestaurant.status;
+  this.cuisine = vancouverRestaurant.cuisine
 };
 
 
@@ -63,12 +62,14 @@ VancouverRestaurant.getAll = result => {
 
 // update VancouverRestaurant by ID
 VancouverRestaurant.updateById = (id, VancouverRestaurant, result) => {
+  console.log(" ************************line 66,vanres.js: Obj: ", VancouverRestaurant)
   sql.query(
-    "UPDATE VancouverRestaurant SET email = ?, name = ?, active = ? WHERE id = ?",
-    [VancouverRestaurant.email, VancouverRestaurant.name, VancouverRestaurant.active, id],
+    "UPDATE VancouverRestaurant SET name = ?, address = ?, postal_code = ?, status = ?, cuisine = ? WHERE id = ?",
+    [VancouverRestaurant.name, VancouverRestaurant.address, VancouverRestaurant.postal_code,
+    VancouverRestaurant.status,VancouverRestaurant.cuisine, id],
     (err, res) => {
       if (err) {
-        console.log("error: ", err);
+        console.log("error line 84: ", err);
         result(null, err);
         return;
       }

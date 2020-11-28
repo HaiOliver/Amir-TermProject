@@ -4,7 +4,6 @@ const sql = require("../db.js");
 const User = function(user) {
   this.email = user.email;
   // create API Token
-
   this.api_key = user.api_key;
   this.number_of_requests = 0;
   this.promo = user.promo
@@ -15,6 +14,7 @@ const User = function(user) {
 User.create = (newUser, result) => {
   console.log("user need to insert is ========================:", newUser)
   sql.query("INSERT INTO Users SET ?", newUser, (err, res) => {
+    // check error
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -61,11 +61,16 @@ User.getAll = result => {
 };
 
 
+
 // update user by ID
-User.updateById = (id, User, result) => {
+User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE Users SET email = ?, name = ?, active = ? WHERE id = ?",
-    [User.email, User.name, User.active, id],
+    "UPDATE Users SET email = ?, api_key = ?, number_of_requests = ?,promo = ? WHERE id = ?",
+    [ user.email,
+      user.api_key,
+      user.number_of_requests,
+      user.promo,
+      id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -79,8 +84,8 @@ User.updateById = (id, User, result) => {
         return;
       }
 
-      console.log("updated User: ", { id: id, ...User });
-      result(null, { id: id, ...User });
+      console.log("updated User: ", { id: id, ...user });
+      result(null, { id: id, ...user });
     }
   );
 };
