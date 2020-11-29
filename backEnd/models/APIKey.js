@@ -1,10 +1,11 @@
-var crypto = require('crypto');
+let jwt = require('jsonwebtoken');
 
-const createAPIKey = (email) =>{
-      let APIKey = crypto.createHash('md5').update(email).digest("hex");
-
-      return APIKey
+const creatJWTToken = (email, promo) =>{
+    return jwt.sign({
+      email: email,
+      promo: promo
+    },"MYSECRETKEY")
     }
 
 
-    module.exports = createAPIKey;
+    module.exports = creatJWTToken;

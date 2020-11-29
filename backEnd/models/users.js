@@ -3,8 +3,6 @@ const sql = require("../db.js");
 // constructor
 const User = function(user) {
   this.email = user.email;
-  // create API Token
-  this.api_key = user.api_key;
   this.number_of_requests = 0;
   this.promo = user.promo
 };
@@ -65,9 +63,9 @@ User.getAll = result => {
 // update user by ID
 User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE Users SET email = ?, api_key = ?, number_of_requests = ?,promo = ? WHERE id = ?",
+    "UPDATE Users SET email = ?, number_of_requests = ?,promo = ? WHERE id = ?",
     [ user.email,
-      user.api_key,
+
       user.number_of_requests,
       user.promo,
       id],

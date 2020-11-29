@@ -31,8 +31,11 @@
                       </form>
                     <!-- Alert API Key -->
                       <div class="alert alert-info" role="alert">
-                            <h2 class="text-success text-center">API Key will display below after fill in registration:</h2>
+                        <div class="container">
+                          <h2 class="text-success text-center">API Key will display below after fill in registration:</h2>
                             <h3 id="APIKey" class="text-danger text-center"></h3>
+                        </div>
+
                       </div>
             </div>
 
@@ -57,7 +60,7 @@
                     .then(response => response.json())
                     .then(data => {
                       console.log('Success, data return from server:', data);
-                        document.getElementById("APIKey").innerHTML = data.api_key
+                        document.getElementById("APIKey").textContent = data.token
                     })
                     .catch((error) => {
                       console.error('Error:', error);

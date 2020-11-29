@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const User = require("./models/users")
 const VancouverRestaurant = require("./models/VanRestaurants")
 const BurnabyRestaurant = require("./models/burnabyRestaurant")
-const createAPIKey = require('./models/APIKey');
+const creatJWTToken = require('./models/APIKey');
 const cors=require('cors');
 const app = express();
 
@@ -30,16 +30,15 @@ app.post("/user", (req,res)=>{
          message: "Content can not be empty!"
        });
      }
-   console.log("====================== body post from user request: ", req.body)
+
    // create API Key:
-    let APIKey = createAPIKey(req.body.email)
-    console.log("API key: ", APIKey)
+    let JWT_Token = creatJWTToken(req.body.email,req.body.promo)
+    console.log("JWT Token: ",JWT_Token)
 
      // Create a Customer
      const user = new User({
        email: req.body.email,
        promo: req.body.promo,
-       api_key: APIKey
      });
 
      // Save Customer in the database -> call User.create() in user.js
@@ -49,7 +48,7 @@ app.post("/user", (req,res)=>{
            message:
              err.message || "line 23, controller.js, Some error occurred while creating the Customer."
          });
-       else res.send(data);
+       else res.send({token:JWT_Token});
      });
 
 
