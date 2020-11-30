@@ -31,6 +31,11 @@ app.post("/user", (req,res)=>{
        });
      }
 
+  //console.log("test sdiid", User.checkUser(req.body.email))
+
+  if (User.checkUser(req.body.email)== true){
+    res.send("Sorry, that Email has already registered, try another email !!")
+  }
    // create API Key:
     let JWT_Token = creatJWTToken(req.body.email,req.body.promo)
     console.log("JWT: ",JWT_Token)

@@ -9,6 +9,22 @@ const User = function(user) {
 };
 
 
+User.checkUser = (email) => {
+
+// retrieve data in DB
+sql.query("Select * from Users", (err, database, fields)=> {
+
+  if (err) throw err;
+  database.find(oneUser => {
+    if(oneUser.email===email){
+      return true
+    }
+  })
+  return false
+});
+
+}
+
 // Increase request
 User.increaseRequest = (email, user, result) => {
 
