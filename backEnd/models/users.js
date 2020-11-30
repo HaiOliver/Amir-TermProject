@@ -8,6 +8,50 @@ const User = function(user) {
 };
 
 
+// Increase request
+User.increaseRequest = (email, user, result) => {
+
+  // retrieve data in DB
+  sql.query("Select * from Users", (err, result, fields)=> {
+
+    if (err) throw err;
+    result.find(oneUser => {
+      if(oneUser.email===email){
+        oneUser.number_of_requests += 1
+        console.log("Bing go, ++++++++++++++++++++++++++++++++")
+      }
+    })
+
+
+  });
+
+  // sql.query(
+  //   "UPDATE Users SET number_of_requests = ? WHERE email = ?",
+  //   [
+  //     foundUser[2] + 1,
+  //     email],
+  //   (err, res) => {
+  //     if (err) {
+  //       console.log("error: ", err);
+  //       result(null, err);
+  //       return;
+  //     }
+
+  //     if (res.affectedRows == 0) {
+  //       // not found User with the id
+  //       result({ kind: "not_found" }, null);
+  //       return;
+  //     }
+
+  //     console.log("updated User request: ", { id: id, ...user });
+  //     result(null, { id: id, ...user });
+  //   }
+  // );
+
+
+
+}
+
 // create new user
 User.create = (newUser, result) => {
   console.log("user need to insert is ========================:", newUser)
@@ -23,6 +67,9 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
+
+
+
 
 // find one user
 User.findById = (UserId, result) => {
@@ -43,6 +90,8 @@ User.findById = (UserId, result) => {
     result({ kind: "not_found" }, null);
   });
 };
+
+
 
 // get all users
 User.getAll = result => {

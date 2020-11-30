@@ -6,7 +6,7 @@ const BurnabyRestaurant = require("./models/burnabyRestaurant")
 const creatJWTToken = require('./models/APIKey');
 const cors=require('cors');
 const app = express();
-
+let jwt = require('jsonwebtoken');
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 
@@ -33,7 +33,7 @@ app.post("/user", (req,res)=>{
 
    // create API Key:
     let JWT_Token = creatJWTToken(req.body.email,req.body.promo)
-    console.log("JWT Token: ",JWT_Token)
+    console.log("JWT: ",JWT_Token)
 
      // Create a Customer
      const user = new User({
@@ -48,11 +48,15 @@ app.post("/user", (req,res)=>{
            message:
              err.message || "line 23, controller.js, Some error occurred while creating the Customer."
          });
-       else res.send({token:JWT_Token});
+       else
+       // send it back to front end
+       res.send({token:JWT_Token});
      });
 
 
 });
+
+
 
 // Get all users
 app.get("/users", (req, res) => {
@@ -149,6 +153,50 @@ app.delete("/users",(req, res) => {
     else res.send({ message: `All Users were deleted successfully!` });
   })
 })
+
+
+// check JWT Token  + increase - > middle ware check for JWT Token
+app.use((req,res,next) => {
+  // check JWt Token is
+  console.log("in middle ware: ", req.headers)
+  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0]==='JWT'){
+
+    jwt.verify(req.headers.authorization.split(' ')[1],'MYSECRETKEY',(err, encode)=>{
+      if(err){
+        return res.status(401).json({message : "Unauthorized user"})
+
+      }else{
+          // increase requests
+          User.increaseRequest(
+            encode.email,
+            new BurnabyRestaurant({email:encode.email, promo:encode.email}),
+            (err, data) => {
+              if (err) {
+                if (err.kind === "not_found") {
+                  res.status(404).send({
+                    message: `Not found Customer with id ${req.params.id}.`
+                  });
+                } else {
+                  res.status(500).send({
+                    message: "Error updating Customer with id " + req.params.id
+                  });
+                }
+              } else res.send(data);
+            }
+
+          )
+          // req.user = encode
+          // console.log("server.js, line 70, encode will be: ", encode)
+          next()
+      }
+    })
+
+  }else{
+    return res.status(401).json({message : "Unauthorized user"})
+  }
+})
+
+
 
 // ================================================= Vancouver Restaurant section =============================================
 
