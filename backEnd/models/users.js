@@ -17,36 +17,27 @@ User.increaseRequest = (email, user, result) => {
     if (err) throw err;
     result.find(oneUser => {
       if(oneUser.email===email){
-        oneUser.number_of_requests += 1
+
         console.log("Bing go, ++++++++++++++++++++++++++++++++")
+        // query update
+          sql.query(
+            "UPDATE Users SET number_of_requests = ? WHERE email = ?",
+            [
+              oneUser.number_of_requests + 1,
+              email ],
+              (error, results, fields) => {
+                if (error){
+                  return console.error(error.message);
+                }
+                console.log('Rows affected:', results.affectedRows);
+              });
+
+
       }
     })
-
-
   });
 
-  // sql.query(
-  //   "UPDATE Users SET number_of_requests = ? WHERE email = ?",
-  //   [
-  //     foundUser[2] + 1,
-  //     email],
-  //   (err, res) => {
-  //     if (err) {
-  //       console.log("error: ", err);
-  //       result(null, err);
-  //       return;
-  //     }
 
-  //     if (res.affectedRows == 0) {
-  //       // not found User with the id
-  //       result({ kind: "not_found" }, null);
-  //       return;
-  //     }
-
-  //     console.log("updated User request: ", { id: id, ...user });
-  //     result(null, { id: id, ...user });
-  //   }
-  // );
 
 
 
