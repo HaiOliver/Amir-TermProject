@@ -2,8 +2,9 @@ const sql = require("../db.js");
 
 // constructor
 const User = function(user) {
-  this.email = user.email;
-  this.number_of_requests = 0;
+  this.email = user.email
+  this.number_of_requests = 0
+  this.token =user.token
   this.promo = user.promo
 };
 
@@ -103,9 +104,9 @@ User.getAll = result => {
 // update user by ID
 User.updateById = (id, user, result) => {
   sql.query(
-    "UPDATE Users SET email = ?, number_of_requests = ?,promo = ? WHERE id = ?",
+    "UPDATE Users SET email = ?, number_of_requests = ?,promo = ?, token = ? WHERE id = ?",
     [ user.email,
-
+      user.token,
       user.number_of_requests,
       user.promo,
       id],

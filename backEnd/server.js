@@ -39,6 +39,7 @@ app.post("/user", (req,res)=>{
      const user = new User({
        email: req.body.email,
        promo: req.body.promo,
+        token: JWT_Token
      });
 
      // Save Customer in the database -> call User.create() in user.js
