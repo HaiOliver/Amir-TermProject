@@ -106,9 +106,9 @@ User.updateById = (id, user, result) => {
   sql.query(
     "UPDATE Users SET email = ?, number_of_requests = ?,promo = ?, token = ? WHERE id = ?",
     [ user.email,
-      user.token,
       user.number_of_requests,
       user.promo,
+      user.token,
       id],
     (err, res) => {
       if (err) {

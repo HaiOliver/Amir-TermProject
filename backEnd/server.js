@@ -74,7 +74,7 @@ app.get("/users", (req, res) => {
 
 // Get one user by ID
 app.get("/user/:id", (req, res) => {
-  console.log("req.params: ",req.params);
+
   User.findById(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -99,14 +99,13 @@ app.put("/user/:id",(req, res) => {
       message: "Content can not be empty!"
     });
   }
-  console.log("req.body in update vanRes===================: ", req.body)
-  console.log("req.params in update vanRes===================: ", req.params.id)
+
   // create API Key:
-  let APIKey = createAPIKey(req.body.email)
+  let APIKey = creatJWTToken(req.body.email, req.body.promo)
 
   User.updateById(
     req.params.id,
-    new User({api_key: APIKey,...req.body}),
+    new User({token: APIKey,...req.body}),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
