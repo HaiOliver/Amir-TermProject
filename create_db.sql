@@ -1,9 +1,9 @@
 CREATE TABLE Users (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email varchar(251) NOT NULL,
-
     number_of_requests int NOT NULL,
-    promo varchar(251) NOT NULL
+    promo varchar(251) NOT NULL,
+    token varchar(251) NOT NULL
 );
 
 CREATE TABLE VancouverRestaurant (
