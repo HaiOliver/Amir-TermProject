@@ -7,6 +7,8 @@ const creatJWTToken = require('./models/APIKey');
 const cors=require('cors');
 const app = express();
 let jwt = require('jsonwebtoken');
+const sql = require("./db.js");
+
 // parse requests of content-type: application/json
 app.use(bodyParser.json());
 
@@ -31,42 +33,51 @@ app.post("/user", (req,res)=>{
        });
      }
 
-  //console.log("test sdiid", User.checkUser(req.body.email))
+  sql.query("SELECT COUNT(*) AS cnt FROM users WHERE email = ? " , req.body.email, function(err , data){
+   if(err){
+       console.log(err);
+   }
+   else{
+       if(data[0].cnt > 0){
+         // send a message if the email already exists in the db.
+         res.send({token: "Sorry, that email has already been registered! Try another email."})
+       }else{
+         if(err){
+           return err
+         }
+         else {
+            // create api key
+             let JWT_Token = creatJWTToken(req.body.email,req.body.promo)
+             console.log("JWT: ",JWT_Token)
 
-  if (User.checkUser(req.body.email)== true){
-    res.send("Sorry, that Email has already registered, try another email !!")
-  }
-   // create API Key:
-    let JWT_Token = creatJWTToken(req.body.email,req.body.promo)
-    console.log("JWT: ",JWT_Token)
+              // Create a Customer
+              const user = new User({
+                email: req.body.email,
+                promo: req.body.promo,
+                 token: JWT_Token
+              });
 
-     // Create a Customer
-     const user = new User({
-       email: req.body.email,
-       promo: req.body.promo,
-        token: JWT_Token
-     });
-
-     // Save Customer in the database -> call User.create() in user.js
-     User.create(user, (err, data) => {
-       if (err)
-         res.status(500).send({
-           message:
-             err.message || "line 23, controller.js, Some error occurred while creating the Customer."
-         });
-       else
-       // send it back to front end
-       res.send({token:JWT_Token});
-     });
-
-
+              // Save Customer in the database -> call User.create() in user.js
+              User.create(user, (err, data) => {
+                if (err)
+                  res.status(500).send({
+                    message:
+                      err.message || "line 23, controller.js, Some error occurred while creating the Customer."
+                  });
+                else
+                // send it back to front end
+                res.send({token:JWT_Token});
+              });
+         }
+       }
+   }
+})
 });
 
 
 
 // Get all users
 app.get("/users", (req, res) => {
-
   User.getAll((err, data) => {
     if (err)
       res.status(500).send({

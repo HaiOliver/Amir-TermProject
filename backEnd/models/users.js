@@ -8,26 +8,8 @@ const User = function(user) {
   this.promo = user.promo
 };
 
-
-User.checkUser = (email) => {
-
-// retrieve data in DB
-sql.query("Select * from Users", (err, database, fields)=> {
-
-  if (err) throw err;
-  database.find(oneUser => {
-    if(oneUser.email===email){
-      return true
-    }
-  })
-  return false
-});
-
-}
-
 // Increase request
 User.increaseRequest = (email, user, result) => {
-
   // retrieve data in DB
   sql.query("Select * from Users", (err, result, fields)=> {
 
@@ -48,8 +30,6 @@ User.increaseRequest = (email, user, result) => {
                 }
                 console.log('Rows affected:', results.affectedRows);
               });
-
-
       }
     })
   });
