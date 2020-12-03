@@ -15,6 +15,14 @@ background-repeat: no-repeat;
       word-wrap: break-word
 }
 
+button{
+      position:relative;
+      margin: auto;
+      left:50%;
+
+
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
@@ -31,6 +39,13 @@ background-repeat: no-repeat;
       h4,h2,h3{
 
             font-size: small;
+      }
+
+      button{
+            position:relative;
+
+      left:50%;
+
       }
 
 
