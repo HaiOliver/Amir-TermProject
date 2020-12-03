@@ -14,3 +14,24 @@ background-repeat: no-repeat;
 #APIKey{
       word-wrap: break-word
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+      body{
+            background: url("https://wallpaperaccess.com/full/767277.jpg");
+            background-size: cover;
+            font-size: small;
+
+            }
+      .title{
+            font-size: small;
+      }
+
+      h4,h2,h3{
+
+            font-size: small;
+      }
+
+
+}
