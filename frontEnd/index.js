@@ -8,7 +8,7 @@ form.addEventListener('submit', event => {
 
         const data = { email, promo };
         // POST request
-        fetch('http://localhost:3000/user', {
+        fetch('https://backend-restaurant-termproject.herokuapp.com/v1/user', {
           method: 'POST', // or 'PUT'
           headers: {
             'Content-Type': 'application/json',
