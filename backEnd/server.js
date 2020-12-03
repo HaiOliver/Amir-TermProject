@@ -19,13 +19,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // simple route
-app.get("/", (req, res) => {
+app.get("/v1/", (req, res) => {
   res.send({ message: "Welcome page." });
 });
 // =================================================================== User section ================================================
 
 // insert new users
-app.post("/user", (req,res)=>{
+app.post("/v1/user", (req,res)=>{
   // Validate request
   if (!req.body) {
        res.status(400).send({
@@ -77,7 +77,7 @@ app.post("/user", (req,res)=>{
 
 
 // Get all users
-app.get("/users", (req, res) => {
+app.get("/v1/users", (req, res) => {
   User.getAll((err, data) => {
     if (err)
       res.status(500).send({
@@ -89,7 +89,7 @@ app.get("/users", (req, res) => {
 });
 
 // Get one user by ID
-app.get("/user/:id", (req, res) => {
+app.get("/v1/user/:id", (req, res) => {
 
   User.findById(req.params.id, (err, data) => {
     if (err) {
@@ -108,7 +108,7 @@ app.get("/user/:id", (req, res) => {
 })
 
 // update on a user by ID
-app.put("/user/:id",(req, res) => {
+app.put("/v1/user/:id",(req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -140,7 +140,7 @@ app.put("/user/:id",(req, res) => {
 
 
 // delete one by ID
-app.delete("/user/:id",(req, res) => {
+app.delete("/v1/user/:id",(req, res) => {
   User.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -159,7 +159,7 @@ app.delete("/user/:id",(req, res) => {
 
 // Remove all Users
 
-app.delete("/users",(req, res) => {
+app.delete("/v1/users",(req, res) => {
   User.removeAll((err, data) => {
     if (err)
       res.status(500).send({
@@ -217,7 +217,7 @@ app.use((req,res,next) => {
 // ================================================= Vancouver Restaurant section =============================================
 
 // Get all Restaurants
-app.get("/vancouverRestaurant", (req, res) => {
+app.get("/v1/vancouverRestaurant", (req, res) => {
 
   VancouverRestaurant.getAll((err, data) => {
     if (err)
@@ -263,7 +263,7 @@ app.post("/vancouverRestaurant",(req,res)=>{
 
 
 // Get one restaurant by ID
-app.get("/vancouverRestaurant/:id", (req, res) => {
+app.get("/v1/vancouverRestaurant/:id", (req, res) => {
   console.log("req.params: ",req.params);
   VancouverRestaurant.findById(req.params.id, (err, data) => {
     if (err) {
@@ -282,7 +282,7 @@ app.get("/vancouverRestaurant/:id", (req, res) => {
 })
 
 // update on a restaurant by ID
-app.put("/vancouverRestaurant/:id",(req, res) => {
+app.put("/v1/vancouverRestaurant/:id",(req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -312,7 +312,7 @@ app.put("/vancouverRestaurant/:id",(req, res) => {
 
 
 // delete one by ID
-app.delete("/vancouverRestaurant/:id",(req, res) => {
+app.delete("/v1/vancouverRestaurant/:id",(req, res) => {
   VancouverRestaurant.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -331,7 +331,7 @@ app.delete("/vancouverRestaurant/:id",(req, res) => {
 
 // Remove all Vancouver Restaurant
 
-app.delete("/vancouverRestaurant",(req, res) => {
+app.delete("/v1/vancouverRestaurant",(req, res) => {
   VancouverRestaurant.removeAll((err, data) => {
     if (err)
       res.status(500).send({
@@ -346,7 +346,7 @@ app.delete("/vancouverRestaurant",(req, res) => {
 // ================================================= Burnaby Restaurant section =============================================
 
 // Get all Restaurants
-app.get("/burnabyRestaurant", (req, res) => {
+app.get("/v1/burnabyRestaurant", (req, res) => {
 
   BurnabyRestaurant.getAll((err, data) => {
     if (err)
@@ -359,7 +359,7 @@ app.get("/burnabyRestaurant", (req, res) => {
 });
 
 // Post -> createone res
-app.post("/burnabyRestaurant",(req,res)=>{
+app.post("/v1/burnabyRestaurant",(req,res)=>{
   // Validate request
   if (!req.body) {
        res.status(400).send({
@@ -392,7 +392,7 @@ app.post("/burnabyRestaurant",(req,res)=>{
 
 
 // Get one restaurant by ID
-app.get("/burnabyRestaurant/:id", (req, res) => {
+app.get("/v1/burnabyRestaurant/:id", (req, res) => {
   console.log("req.params: ",req.params);
   BurnabyRestaurant.findById(req.params.id, (err, data) => {
     if (err) {
@@ -411,7 +411,7 @@ app.get("/burnabyRestaurant/:id", (req, res) => {
 })
 
 // update on a restaurant by ID
-app.put("/burnabyRestaurant/:id",(req, res) => {
+app.put("/v1/burnabyRestaurant/:id",(req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -441,7 +441,7 @@ app.put("/burnabyRestaurant/:id",(req, res) => {
 
 
 // delete one by ID
-app.delete("/burnabyRestaurant/:id",(req, res) => {
+app.delete("/v1/burnabyRestaurant/:id",(req, res) => {
   BurnabyRestaurant.remove(req.params.id, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
@@ -460,7 +460,7 @@ app.delete("/burnabyRestaurant/:id",(req, res) => {
 
 // Remove all Vancouver Restaurant
 
-app.delete("/burnabyRestaurant",(req, res) => {
+app.delete("/v1/burnabyRestaurant",(req, res) => {
   BurnabyRestaurant.removeAll((err, data) => {
     if (err)
       res.status(500).send({
