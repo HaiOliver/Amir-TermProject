@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./index.css">
+    <title>API Documentation</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="jumbotron justify-content-center">
+              <h1 style="text-align: center; font-weight: bold;">Documentation</h1>
+        </div>
+        <div style="background-color: white;padding: 10px;">
+            <h3 class="doc">Description of Available Resources and URIs</h3>
+              <ol>
+                <h4><li>localhost:3000/vancouverRestaurant</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint retrieves all of the vancouver restaurants in the api with their details (name, address, postal code, status, cuisine)</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/vancouverRestaurant</li></h4>
+              </li>
+                <h5>
+                    <ul>
+                        <li>This post method endpoint creates a new Vancouver restaurant</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/vancouverRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint returns the Vancouver restaurant specified by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/vancouverRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This put method endpoint updates a Vancouver restaurant specifed by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/vancouverRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint deletes a Vancouver restaurant specifed by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/vancouverRestaurant</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint deletes all Vancouver restaurants</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint retrieves all of the Burnaby restaurants in the api with their details (name, address, postal code, status, cuisine)</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant</li></h4>
+                <h5>
+                    <ul>
+                        <li>This post method endpoint creates a new Burnaby restaurant</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint retrieves one Burnaby restaurant specifed by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This put method endpoint updates one Burnaby restaurant specifed by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint deletes one Burnaby restaurant specifed by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/burnabyRestaurant</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint deletes all Burnaby restaurants</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/user</li></h4>
+                <h5>
+                    <ul>
+                        <li>This post method endpoint inserts a new user with their email, promo code, and token</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/users</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint retrieves all of the current users</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/user/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This get method endpoint retrieves a specific user by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/user/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This put method endpoint updates a specific user by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/user/:id</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint deletes a specific user by id</li>
+                    </ul>
+                </h5>
+                <h4><li>localhost:3000/users</li></h4>
+                <h5>
+                    <ul>
+                        <li>This delete method endpoint delets all users</li>
+                    </ul>
+                </h5>
+              </ol>
+
+            <h3 class="doc">Available HTTP methods</h3>
+                <h4>
+                <ul>
+                    <li>POST</li>
+                    <li>GET</li>
+                    <li>PUT</li>
+                    <li>DELETE</li>
+                </ul>
+                </h4>
+            <h3 class="doc">Sample JSON representation for each resource in the API</h3>
+            <h4>The user must enter the api key they received in the front end and enter it as a JWT value in the authorization header in order
+            to access the API</h4>
+            <img src="../images/burnaby_get_all.png" alt="get req burnaby"/>
+            <h3 class="doc">Examples of JSON representation of client payload for the services</h3>
+              <img src="../images/payload.png" alt="get req burnaby"/>
+        </div>
+
+     <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

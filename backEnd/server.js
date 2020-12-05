@@ -66,7 +66,7 @@ app.post("/user", (req,res)=>{
                   });
                 else
                 // send it back to front end
-                res.send({token:JWT_Token});
+                res.send({token:JWT_Token, data: data});
               });
          }
        }

@@ -30,6 +30,7 @@ User.increaseRequest = (email, user, result) => {
                 }
                 console.log('Rows affected:', results.affectedRows);
               });
+                      console.log('Nunmber of requests',oneUser.number_of_requests)
       }
     })
   });
