@@ -31,7 +31,7 @@ values (6,"Au Comptoir","2278 W 4th Ave","U5O M2I","Take out only","French food"
 
 
 select * from VancouverRestaurant;
---------------------------------------------------------------------------------------------------
+
 CREATE TABLE BurnabyRestaurant (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name varchar(251) NOT NULL,
@@ -56,7 +56,7 @@ insert into BurnabyRestaurant (id, name, address, postal_code,status, cuisine)
 values (6,"Au Comptoir","2278 W 4th Ave","U5O M2I","Take out only","French food");
 
 
-----------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE RichmondRestaurant (
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name varchar(251) NOT NULL,
